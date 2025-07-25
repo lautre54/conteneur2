@@ -20,9 +20,8 @@ jobs:
        username: ${{ secrets.DOCKERHUB_USERNAME }}
        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push to dockerhub
-      uses: docker/build-push-action@v5
-      with:
-       context:
-       push: true
-       tags: kicsipixel/githubaction:latest
+   - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/chatphp:latest .
+
+  - name: Push Docker image to Docker Hub
+    run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/chatphp:latest
